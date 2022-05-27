@@ -13,8 +13,6 @@ cd Sparks-Networks
 
 python3 -m pip install requirement.txt
 
-# Open ubuntu terminal
-## Run following commands:
 ### List all crontabs
 crontab -l
 
