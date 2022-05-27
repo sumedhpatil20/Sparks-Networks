@@ -23,8 +23,6 @@ select distinct user_id from subscriptions where status = 'Inactive'
 
 select distinct msg.senderid as user_id from inactive_subscriptions subs left join MESSAGES msg on subs.user_id = msg.senderid;
 
-select * from inactive_subscriptions subs left join MESSAGES msg on subs.user_id = msg.senderid;
-
 --  Did you identified any inaccurate/noisy record that somehow could prejudice 
 -- the data analyses? How to monitor it (SQL query)? Please explain how do you 
 -- suggest to handle with this noisy data?
