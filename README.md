@@ -1,5 +1,3 @@
-### open ingest.py file with text editor to edit Snowflake Connection Parameters like USER_NAME, PASSWORD and ACCOUNT URL from requirements file 
-### Save file.
 # Open ubuntu terminal
 ## Run following commands:
 
@@ -12,6 +10,10 @@ git clone https://github.com/sumedhpatil20/Sparks-Networks.git
 cd Sparks-Networks
 
 python3 -m pip install requirement.txt
+
+### open ingest.py file with text editor to edit Snowflake Connection Parameters like USER_NAME, PASSWORD and ACCOUNT URL from requirements file 
+vim ingest.py
+### Save file.
 
 ### List all crontabs
 crontab -l
