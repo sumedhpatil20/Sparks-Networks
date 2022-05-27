@@ -17,11 +17,11 @@ select count(*) as total_active_subscriptions_today from PRODUCTION_DB.PROD_SCHE
 -- (some extra context for you: in our apps only premium users can send messages).
 
 with inactive_subscriptions as(
-select distinct user_id from subscriptions where status = 'Inactive'
--- select distinct user_id from subscriptions where status <> 'Active' and date(enddate) <= current_date()
+-- select distinct user_id from subscriptions where status = 'Inactive'
+select distinct user_id from subscriptions where status <> 'Active' and date(enddate) <= current_date()
 )
 
-select distinct msg.senderid as user_id from inactive_subscriptions subs left join MESSAGES msg on subs.user_id = msg.senderid;
+select distinct msg.senderid as user_id_of_sending_messages_without_an_active_subscription from inactive_subscriptions subs left join MESSAGES msg on subs.user_id = msg.senderid;
 
 --  Did you identified any inaccurate/noisy record that somehow could prejudice 
 -- the data analyses? How to monitor it (SQL query)? Please explain how do you 
