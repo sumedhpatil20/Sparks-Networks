@@ -26,8 +26,8 @@ def insert_into_users(lst):
 
 def insert_into_subscriptions(lst):
     query = f"""insert into RAW_DB.RAW_SCHEMA.SUBSCRIPTIONS 
-    (user_id,createdAt,startDate,endDate,status,amount) values
-    ({lst[0]},'{lst[1]}','{lst[2]}','{lst[3]}','{lst[4]}',{lst[5]});"""
+    (user_id,createdAt,startDate,endDate,status,amount,updatedAt) values
+    ({lst[0]},'{lst[1]}','{lst[2]}','{lst[3]}','{lst[4]}',{lst[5]},'{lst[6]}');"""
     # print(query)
     cs.execute(query)
 
@@ -57,11 +57,11 @@ for i in range (0,len(df)):
                     if len(subscription_data[i]) != 0 :
                         list_subscription_rows.append(subscription_data[i][j][keys])
                 # print("subscription list -----  ",list_subscription_rows)
+                list_subscription_rows.append(df['updatedAt'][i])
                 insert_into_subscriptions(list_subscription_rows)
                 # print()
     # print("users list -----  ",list_users_row)
     insert_into_users(list_users_row)
-
 
 def insert_into_messages(lst):
     query = f"""insert into RAW_DB.RAW_SCHEMA.MESSAGES 
