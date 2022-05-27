@@ -1,4 +1,9 @@
 ------------------------------------------- DDL -------------------------------------------------
+create database RAW_DB;
+create schema RAW_DB.RAW_SCHEMA;
+
+create database PRODUCTION_DB;
+create schema PRODUCTION_DB.PROD_SCHEMA;
 
 create table raw_db.raw_schema.USERS
     (createdAt varchar,
