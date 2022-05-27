@@ -20,7 +20,8 @@ create table raw_db.raw_schema.subscriptions
      startDate varchar,
      endDate varchar,
      status  varchar,
-     amount varchar);
+     amount varchar,
+     updatedat varchar);
 
 create table raw_db.raw_schema.messages  
       (createdAt varchar ,
@@ -49,7 +50,8 @@ create table PRODUCTION_DB.PROD_SCHEMA.subscriptions
      startDate timestamp,
      endDate timestamp,
      status  varchar,
-     amount float);
+     amount float
+     updatedat timestamp);
 
 create table PRODUCTION_DB.PROD_SCHEMA.messages  
       (createdAt timestamp ,
@@ -75,9 +77,9 @@ insert into production_db.prod_schema.USERS
     profession,
     income,
     datediff('year', date(BIRTHDATE::timestamp), sysdate())  as age
-    from raw_db.raw_schema.users
+    from raw_db.raw_schema.users where updatedat > (select max(updatedat) from production_db.prod_schema.USERS)
     );
-
+    
 insert into production_db.prod_schema.subscriptions
     (select 
      user_id ::integer,
@@ -85,8 +87,9 @@ insert into production_db.prod_schema.subscriptions
      startDate:: timestamp,
      endDate :: timestamp,
      status :: varchar,
-     amount :: float
-     from raw_db.raw_schema.subscriptions
+     amount :: float,
+     updatedat :: timestamp
+     from raw_db.raw_schema.subscriptions where updatedat > (select max(updatedat) from production_db.prod_schema.subscriptions )
     );
 
 insert into production_db.prod_schema.messages
@@ -95,7 +98,7 @@ insert into production_db.prod_schema.messages
     RECEIVERID :: integer,
     MESSAGE_ID :: integer,
     SENDERID :: integer 
-    from raw_db.raw_schema.messages
+    from raw_db.raw_schema.messages where CREATEDAT > (select max(CREATEDAT) from production_db.prod_schema.messages)
     );
     
 -----------------------------------------------------------------------------------------------------------------
